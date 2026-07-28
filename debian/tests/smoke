@@ -1,0 +1,5 @@
+#!/bin/sh
+set -eu
+lsusers --version
+lsusers count
+lsusers --names >/dev/null

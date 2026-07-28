@@ -1,0 +1,8 @@
+#compdef lsusers
+_arguments \
+  '1:command:(all human system count)' \
+  '--json[output JSON]' \
+  '--csv[output CSV]' \
+  '--names[output usernames only]' \
+  '--help[show help]' \
+  '--version[show version]'

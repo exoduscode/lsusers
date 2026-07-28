@@ -1,0 +1,2 @@
+completions/lsusers.bash usr/share/bash-completion/completions
+completions/_lsusers usr/share/zsh/vendor-completions

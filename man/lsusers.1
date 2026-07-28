@@ -1,0 +1,39 @@
+.TH LSUSERS 1 "July 2026" "lsusers 0.1.0" "User Commands"
+.SH NAME
+lsusers \- list Linux user accounts simply
+.SH SYNOPSIS
+.B lsusers
+.RI [ command ]
+.RI [ options ]
+.SH DESCRIPTION
+lsusers lists Linux user accounts using the system account database.
+By default it lists human users.
+.SH COMMANDS
+.TP
+.B all
+List all users.
+.TP
+.B human
+List human users.
+.TP
+.B system
+List system users.
+.TP
+.B count
+Show user counts.
+.SH OPTIONS
+.TP
+.B --json
+Output JSON.
+.TP
+.B --csv
+Output CSV.
+.TP
+.B --names
+Output usernames only.
+.TP
+.B --version
+Show version.
+.TP
+.B --help
+Show help.
