@@ -24,6 +24,9 @@ pytest
 lsusers
 ```
 
+## Author
+Matt Abreu [X: @matheusabr](https://x.com/matheusabr) - [Exoduscode](https://exoduscode.io)
+
 ## License
 
 GPL-3.0-or-later.
