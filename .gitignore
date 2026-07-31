@@ -1,26 +1,61 @@
-.venv/
+###############################################################################
+# Python
+###############################################################################
+
 __pycache__/
 *.py[cod]
+*$py.class
+*.so
+
+###############################################################################
+# Python environments
+###############################################################################
+
+.venv/
+venv/
+env/
+ENV/
+
+###############################################################################
+# Python tooling and caches
+###############################################################################
+
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
+.pyright/
+.pyre/
+.pytype/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+
+###############################################################################
+# Python packaging
+###############################################################################
+
 build/
 dist/
+.pybuild/
+*.egg
 *.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+###############################################################################
+# Debian packaging
+###############################################################################
+
 *.deb
 *.dsc
 *.changes
 *.buildinfo
+*.build
+*.tar.xz
+*.debian.tar.*
+*.orig.tar.*
 
-# Python and pybuild
-.pybuild/
-build/
-dist/
-*.egg-info/
-__pycache__/
-*.py[cod]
-
-# Debian build artifacts
 debian/.debhelper/
 debian/debhelper-build-stamp
 debian/files
@@ -28,15 +63,133 @@ debian/*.substvars
 debian/*.debhelper
 debian/lsusers/
 
-# Local reports
+###############################################################################
+# AI assistants — local state, sessions, caches and history
+###############################################################################
+
+# Claude Code
+.claude/settings.local.json
+.claude/cache/
+.claude/history/
+.claude/sessions/
+.claude/projects/
+.claude/todos/
+
+# Cursor
+.cursor/cache/
+.cursor/logs/
+.cursor/sessions/
+.cursor/worktrees/
+
+# GitHub Copilot local state
+.github/copilot/cache/
+.github/copilot/sessions/
+
+# Aider
+.aider.chat.history.md
+.aider.input.history
+.aider.tags.cache.v*
+.aider.repo.map
+.aider.cache/
+.aider.log
+
+# Continue
+.continue/cache/
+.continue/logs/
+.continue/sessions/
+.continue/index/
+.continue/dev_data/
+
+# Cline
+.cline/cache/
+.cline/logs/
+.cline/sessions/
+.cline/checkpoints/
+.cline/tasks/
+
+# Roo Code
+.roo/cache/
+.roo/logs/
+.roo/sessions/
+.roo/checkpoints/
+.roo/tasks/
+
+# Windsurf / Codeium
+.windsurf/cache/
+.windsurf/logs/
+.windsurf/sessions/
+.codeium/cache/
+.codeium/logs/
+
+# OpenCode
+.opencode/cache/
+.opencode/logs/
+.opencode/sessions/
+.opencode/history/
+.opencode/state/
+
+# Generic AI-generated local data
+.ai/cache/
+.ai/logs/
+.ai/sessions/
+.ai/history/
+.ai/checkpoints/
+.ai/tmp/
+
+# Local prompt drafts and transcripts
+*.ai-session
+*.ai-history
+*.ai-transcript
+*.prompt.local.md
+*.instructions.local.md
+
+###############################################################################
+# Environment variables and secrets
+###############################################################################
+
+.env
+.env.*
+!.env.example
+!.env.template
+
+*.pem
+*.key
+*.p12
+*.pfx
+
+###############################################################################
+# Logs and local reports
+###############################################################################
+
+*.log
 lintian.log
 
-# Python environments and build artifacts
-.venv/
-venv/
-build/
-dist/
-*.egg-info/
-.pytest_cache/
-__pycache__/
-*.py[cod]
+###############################################################################
+# IDEs and editors
+###############################################################################
+
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+###############################################################################
+# Operating systems
+###############################################################################
+
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+Desktop.ini
+
+###############################################################################
+# Temporary files
+###############################################################################
+
+tmp/
+temp/
+.cache/
+*.tmp
+*.temp

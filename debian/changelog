@@ -1,3 +1,9 @@
+lsusers (0.1.1-1) noble; urgency=medium
+
+  * Update package maintainer metadata and author links.
+
+ -- Matt Abreu <matheusabreu.dev@gmail.com>  Fri, 31 Jul 2026 14:01:35 +0000
+
 lsusers (0.1.0-1) noble; urgency=medium
 
   * Initial release.

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="220" viewBox="0 0 640 220" role="img" aria-labelledby="title desc">
+  <title id="title">lsusers logo</title>
+  <desc id="desc">A terminal prompt combined with user silhouettes and the lsusers wordmark.</desc>
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#2563eb"/><stop offset="100%" stop-color="#7c3aed"/></linearGradient></defs>
+  <rect x="8" y="8" width="624" height="204" rx="36" fill="#0f172a"/>
+  <rect x="28" y="28" width="180" height="164" rx="24" fill="url(#g)"/>
+  <path d="M62 76l28 26-28 26" fill="none" stroke="#fff" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M106 134h54" stroke="#fff" stroke-width="14" stroke-linecap="round"/>
+  <circle cx="118" cy="74" r="16" fill="#fff" opacity=".95"/>
+  <circle cx="82" cy="158" r="12" fill="#fff" opacity=".82"/>
+  <circle cx="154" cy="158" r="12" fill="#fff" opacity=".82"/>
+  <path d="M94 158c5-19 14-28 24-28s19 9 24 28" fill="#fff" opacity=".95"/>
+  <path d="M62 182c3-13 10-20 20-20s17 7 20 20" fill="#fff" opacity=".82"/>
+  <path d="M134 182c3-13 10-20 20-20s17 7 20 20" fill="#fff" opacity=".82"/>
+  <text x="238" y="128" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="72" font-weight="700" fill="#f8fafc">lsusers</text>
+  <text x="242" y="163" font-family="Inter, Arial, sans-serif" font-size="20" fill="#94a3b8">Linux user accounts, clearly listed.</text>
+</svg>

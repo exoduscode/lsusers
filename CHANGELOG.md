@@ -1,8 +1,34 @@
 # Changelog
 
-## 0.1.0
+All notable changes to this project will be documented in this file.
 
-- Initial MVP.
-- List human, system, and all users.
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+### Planned
+
+- Additional filtering options
+- Group-aware listing
+- Improved package distribution
+
+## [0.1.1] - 2026-07-31
+
+### Changed
+
+- Updated Debian package maintainer metadata.
+- Updated the author's X profile link.
+- Improved public project metadata.
+
+## [0.1.0] - 2026-07-31
+
+### Added
+
+- Human, system, and all-user listing commands.
 - Table, JSON, CSV, and names-only output.
-- Count summary.
+- Debian package support.
+- Automated tests and GitHub Actions CI.
+
+[Unreleased]: https://github.com/exoduscode/lsusers/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/exoduscode/lsusers/compare/v0.1.0...v0.1.1
+[0.1.0]: https://github.com/exoduscode/lsusers/releases/tag/v0.1.0
