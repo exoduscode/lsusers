@@ -12,10 +12,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 
 - Tag-gated release workflow that tests, builds, verifies, attests, and
   publishes wheel, source, and Debian artifacts without rebuilding them.
 - SHA-256 manifest and automated release-version consistency checks.
+- Continuous CodeQL, dependency review, and Dependabot security controls.
 
 ### Changed
 
 - GitHub Actions dependencies are pinned to immutable commit SHAs.
+- Security investigation and least privilege are explicit acceptance criteria
+  for every project change.
 
 ### Planned
 
