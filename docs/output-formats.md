@@ -83,5 +83,5 @@ system: 24
 total: 26
 ```
 
-The labels and ordering are stable in version 0.1.2, but this is not JSON or
+The labels and ordering are stable in version 0.1.3, but this is not JSON or
 CSV. Parse it only if the human-readable contract is suitable for your script.

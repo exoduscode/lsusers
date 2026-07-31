@@ -46,6 +46,26 @@ def main() -> None:
             "debian/changelog",
             r"^lsusers \(([^)]+)\)",
         ).removesuffix("-1"),
+        "docs/README.md": match_one(
+            "docs/README.md",
+            r"describes version \*\*([0-9]+\.[0-9]+\.[0-9]+)\*\*",
+        ),
+        "docs/cli-reference.md": match_one(
+            "docs/cli-reference.md",
+            r"Print `lsusers ([0-9]+\.[0-9]+\.[0-9]+)`",
+        ),
+        "man/lsusers.1": match_one(
+            "man/lsusers.1",
+            r'"lsusers ([0-9]+\.[0-9]+\.[0-9]+)" "User Commands"',
+        ),
+        "Homebrew formula source": match_one(
+            "packaging/homebrew-tap/Formula/lsusers.rb.template",
+            r"/refs/tags/v([0-9]+\.[0-9]+\.[0-9]+)\.tar\.gz",
+        ),
+        "Homebrew formula test": match_one(
+            "packaging/homebrew-tap/Formula/lsusers.rb.template",
+            r'assert_match "lsusers ([0-9]+\.[0-9]+\.[0-9]+)"',
+        ),
     }
 
     for path, actual in versions.items():

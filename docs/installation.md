@@ -2,8 +2,8 @@
 
 ## Supported end-user installation methods
 
-- Ubuntu 24.04 users install from the signed ExodusCode APT repository.
-- macOS users install the formula from the ExodusCode Homebrew tap.
+- Ubuntu 24.04 users install from the signed Exoduscode APT repository.
+- macOS users install the formula from the Exoduscode Homebrew tap.
 
 Installing from source is documented for contributors and development only.
 
@@ -75,7 +75,7 @@ Ubuntu 24.04 installation path.
 
 ## macOS: install with Homebrew
 
-On macOS, install from the ExodusCode tap:
+On macOS, install from the Exoduscode tap:
 
 ```bash
 brew install exoduscode/tap/lsusers

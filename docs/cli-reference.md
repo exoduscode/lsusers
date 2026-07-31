@@ -23,7 +23,7 @@ The command may appear before or after the format option.
 | Option | Behavior |
 |---|---|
 | `-h`, `--help` | Print generated command help and exit. |
-| `--version` | Print `lsusers 0.1.2` and exit. |
+| `--version` | Print `lsusers 0.1.3` and exit. |
 | `--json` | Emit an indented JSON array. |
 | `--csv` | Emit CSV with a header row. |
 | `--names` | Emit one username per line. |

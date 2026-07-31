@@ -16,6 +16,9 @@ updates:
       # versioned release. Digest-only updates from the moving releases/v4
       # branch are intentionally reviewed and applied as one manual change.
       - dependency-name: github/codeql-action/*
+      # The release GitHub App token action is security-sensitive and is
+      # upgraded only after auditing its permission and token semantics.
+      - dependency-name: actions/create-github-app-token
 
   - package-ecosystem: pip
     directory: /

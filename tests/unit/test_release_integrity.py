@@ -62,3 +62,17 @@ def test_codeql_steps_share_one_audited_release_pin():
 
     assert set(pins) == {"init", "analyze"}
     assert pins["init"] == pins["analyze"]
+
+
+def test_homebrew_token_action_is_pinned_and_scoped():
+    workflow = (ROOT / ".github" / "workflows" / "release.yml").read_text(
+        encoding="utf-8"
+    )
+
+    assert re.search(
+        r"actions/create-github-app-token@[0-9a-f]{40} # v[0-9]+\.[0-9]+\.[0-9]+",
+        workflow,
+    )
+    assert "repositories: homebrew-tap" in workflow
+    assert "environment: homebrew" in workflow
+    assert "HOMEBREW_APP_PRIVATE_KEY" in workflow

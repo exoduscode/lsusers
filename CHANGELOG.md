@@ -6,13 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 
 
 ## [Unreleased]
 
+## [0.1.3] - 2026-07-31
+
 ### Added
 
-- Signed ExodusCode APT repository documentation for Ubuntu 24.04.
+- Signed Exoduscode APT repository documentation for Ubuntu 24.04.
 - Tag-gated release workflow that tests, builds, verifies, attests, and
   publishes wheel, source, and Debian artifacts without rebuilding them.
 - SHA-256 manifest and automated release-version consistency checks.
 - Continuous CodeQL, dependency review, and Dependabot security controls.
+- Automated Homebrew tap update pull requests authenticated by a
+  least-privilege GitHub App.
 
 ### Changed
 
@@ -21,12 +25,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 
   for every project change.
 - CodeQL updates are applied as one audited version change instead of separate
   digest-only Dependabot pull requests.
-
-### Planned
-
-- Additional filtering options
-- Group-aware listing
-- Improved package distribution
 
 ## [0.1.2] - 2026-07-31
 
@@ -58,7 +56,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 
 - Debian package support.
 - Automated tests and GitHub Actions CI.
 
-[Unreleased]: https://github.com/exoduscode/lsusers/compare/v0.1.2...HEAD
+[Unreleased]: https://github.com/exoduscode/lsusers/compare/v0.1.3...HEAD
+[0.1.3]: https://github.com/exoduscode/lsusers/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/exoduscode/lsusers/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/exoduscode/lsusers/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/exoduscode/lsusers/releases/tag/v0.1.0

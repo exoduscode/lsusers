@@ -1,7 +1,7 @@
 # Debian packaging and releases
 
 Released packages are the supported user-facing distribution channels: the
-signed ExodusCode APT repository serves Ubuntu 24.04, and Homebrew installs the
+signed Exoduscode APT repository serves Ubuntu 24.04, and Homebrew installs the
 formula on macOS. A source or editable Python installation is a development
 workflow.
 
@@ -81,7 +81,7 @@ dispatch. Its portable test matrix covers Python 3.9 through 3.13 on Ubuntu
 ## Homebrew tap
 
 The `packaging/homebrew-tap/` scaffold is intended for the separate
-`exoduscode/homebrew-tap` repository. After the `v0.1.2` tag exists, calculate
+`exoduscode/homebrew-tap` repository. For each immutable release tag, calculate
 the GitHub archive SHA-256, render `Formula/lsusers.rb` from the supplied
 template, and open a pull request in the tap. Its workflow audits, installs,
 and runs the formula test on macOS.
@@ -144,7 +144,8 @@ environment `release` with a required reviewer before creating the next tag.
      --repo exoduscode/lsusers
    ```
 
-9. Calculate the tagged archive checksum and finalize the Homebrew formula.
+9. Confirm the `update-homebrew` job opened a formula PR using the tagged
+   archive checksum.
 10. Add the immutable `.deb` metadata and SHA-256 to the APT repository
    manifest.
 11. Publish the approved tag through the protected APT production workflow.
@@ -153,5 +154,25 @@ environment `release` with a required reviewer before creating the next tag.
     `sudo apt install lsusers` on configured Ubuntu 24.04 systems and
     `brew install exoduscode/tap/lsusers` on macOS.
 
-Version values are currently duplicated, so keeping them synchronized is a
-manual release responsibility.
+The version consistency check covers Python metadata, runtime version, Debian
+metadata, the changelog, CLI documentation, and both version-bearing fields in
+the Homebrew formula template.
+
+## Homebrew release automation
+
+After GitHub Release publication, `update-homebrew` calculates the SHA-256 of
+the immutable tagged source archive, updates `Formula/lsusers.rb`, and opens an
+idempotent pull request in `exoduscode/homebrew-tap`. It never pushes to the
+tap's default branch.
+
+Configure a GitHub App installed only on `exoduscode/homebrew-tap`, with these
+repository permissions:
+
+- Contents: read and write;
+- Pull requests: read and write;
+- Metadata: read-only (implicit).
+
+Store its ID and private key as `HOMEBREW_APP_ID` and
+`HOMEBREW_APP_PRIVATE_KEY` secrets in a protected `homebrew` environment. The
+workflow requests a repository-scoped installation token at runtime; no
+personal access token or long-lived cross-repository token is used.
