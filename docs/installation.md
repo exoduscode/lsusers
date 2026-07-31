@@ -2,7 +2,7 @@
 
 ## Supported end-user installation methods
 
-- Linux users install the released Debian package with APT.
+- Ubuntu 24.04 users install from the signed ExodusCode APT repository.
 - macOS users install the formula from the ExodusCode Homebrew tap.
 
 Installing from source is documented for contributors and development only.
@@ -20,14 +20,37 @@ system. It does not need root privileges.
 
 ## Linux: install with APT
 
-Download the `.deb` file for the desired release, then run:
+The signed repository currently supports Ubuntu 24.04 (`noble`) on AMD64 and
+ARM64. Configure it once without using the deprecated `apt-key` mechanism:
 
 ```bash
-sudo apt install ./lsusers_<version>_all.deb
+curl -fsSL https://exoduscode.github.io/apt/keys/exoduscode-archive-keyring.gpg \
+  | sudo tee /usr/share/keyrings/exoduscode-archive-keyring.gpg >/dev/null
+
+sudo tee /etc/apt/sources.list.d/exoduscode.sources >/dev/null <<'EOF'
+Types: deb
+URIs: https://exoduscode.github.io/apt
+Suites: noble
+Components: main
+Signed-By: /usr/share/keyrings/exoduscode-archive-keyring.gpg
+EOF
+
+sudo apt update
+sudo apt install lsusers
 ```
 
-APT resolves and installs the package dependencies. Direct installation with
-`dpkg -i` is not the supported end-user workflow.
+Verify the complete signing-key fingerprint before trusting it:
+
+```text
+C85D DAF2 A38C A242 A745 D9DE 5A40 25DA 3610 A2EC
+```
+
+Future releases are delivered through normal APT upgrades:
+
+```bash
+sudo apt update
+sudo apt upgrade
+```
 
 Verify the installation:
 
@@ -37,6 +60,18 @@ lsusers count
 ```
 
 The Debian package also installs the manual page and Bash and Zsh completion.
+
+### Recovery installation
+
+For unsupported distributions or repository recovery, download the `.deb`
+from the corresponding GitHub Release and install the local file:
+
+```bash
+sudo apt install ./lsusers_<version>_all.deb
+```
+
+This bypasses automatic discovery of future releases and is not the primary
+Ubuntu 24.04 installation path.
 
 ## macOS: install with Homebrew
 

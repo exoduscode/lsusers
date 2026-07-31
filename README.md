@@ -48,11 +48,29 @@ For end users, the supported installation methods are **APT on Linux** and
 
 ### Linux (APT)
 
-Download the `.deb` file for the release, then install it with APT:
+Ubuntu 24.04 users configure the signed ExodusCode repository once:
 
 ```bash
-sudo apt install ./lsusers_<version>_all.deb
+curl -fsSL https://exoduscode.github.io/apt/keys/exoduscode-archive-keyring.gpg \
+  | sudo tee /usr/share/keyrings/exoduscode-archive-keyring.gpg >/dev/null
+
+sudo tee /etc/apt/sources.list.d/exoduscode.sources >/dev/null <<'EOF'
+Types: deb
+URIs: https://exoduscode.github.io/apt
+Suites: noble
+Components: main
+Signed-By: /usr/share/keyrings/exoduscode-archive-keyring.gpg
+EOF
+
+sudo apt update
+sudo apt install lsusers
 ```
+
+Signing-key fingerprint:
+`C85D DAF2 A38C A242 A745 D9DE 5A40 25DA 3610 A2EC`.
+
+Direct installation of the release `.deb` remains available as a recovery
+option for systems outside the supported repository.
 
 ---
 
