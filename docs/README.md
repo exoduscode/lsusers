@@ -9,8 +9,8 @@ The documentation in this directory describes version **0.1.2**.
 
 ## Start here
 
-- [Installation](installation.md) — supported environment, Debian package, and
-  source installation.
+- [Installation](installation.md) — signed APT repository, Homebrew, and
+  development installation.
 - [Usage guide](usage.md) — common commands and practical examples.
 - [Command reference](cli-reference.md) — every command, option, default, and
   exit status.

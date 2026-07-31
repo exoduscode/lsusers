@@ -1,8 +1,9 @@
 # Debian packaging and releases
 
-Released packages are the supported user-facing distribution channels: APT
-installs the `.deb` on Linux, and Homebrew installs the formula on macOS. A
-source or editable Python installation is a development workflow.
+Released packages are the supported user-facing distribution channels: the
+signed ExodusCode APT repository serves Ubuntu 24.04, and Homebrew installs the
+formula on macOS. A source or editable Python installation is a development
+workflow.
 
 ## Package contents
 
@@ -85,6 +86,24 @@ the GitHub archive SHA-256, render `Formula/lsusers.rb` from the supplied
 template, and open a pull request in the tap. Its workflow audits, installs,
 and runs the formula test on macOS.
 
+## Signed APT repository
+
+`exoduscode/apt` publishes immutable release assets through GitHub Pages at
+`https://exoduscode.github.io/apt`. A protected manual workflow:
+
+1. accepts only release tags and codenames in its manifest;
+2. verifies GitHub Release state, digest, package name, version, and
+   architecture;
+3. rejects replacement of an existing version and version downgrades;
+4. imports the package with `reprepro` and signs `Release`, `Release.gpg`, and
+   `InRelease` with the dedicated archive key;
+5. tests signatures, tamper rejection, installation, removal, and
+   reinstallation on native AMD64 and ARM64 runners;
+6. deploys only after both architectures pass.
+
+The public archive-key fingerprint is:
+`C85D DAF2 A38C A242 A745 D9DE 5A40 25DA 3610 A2EC`.
+
 ## Release checklist
 
 1. Ensure user-visible behavior, docs, completions, and the manual page agree.
@@ -96,9 +115,11 @@ and runs the formula test on macOS.
 6. Verify `lsusers --version` from the built package.
 7. Tag the release and publish the `.deb` and relevant source artifacts.
 8. Calculate the tagged archive checksum and finalize the Homebrew formula.
-9. Confirm project and tap GitHub Actions checks are green.
-10. Verify the documented end-user commands:
-    `sudo apt install ./lsusers_<version>_all.deb` on Linux and
+9. Add the immutable asset metadata and SHA-256 to the APT repository manifest.
+10. Publish the approved tag through the protected APT production workflow.
+11. Confirm project, APT, and tap GitHub Actions checks are green.
+12. Verify the documented end-user commands:
+    `sudo apt install lsusers` on configured Ubuntu 24.04 systems and
     `brew install exoduscode/tap/lsusers` on macOS.
 
 Version values are currently duplicated, so keeping them synchronized is a
