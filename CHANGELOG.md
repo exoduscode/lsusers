@@ -12,6 +12,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 
 - Group-aware listing
 - Improved package distribution
 
+## [0.1.2] - 2026-07-31
+
+### Added
+
+- Official macOS support with platform-specific account classification.
+- CI coverage for Python 3.9 through 3.13 on Linux, macOS ARM64, and macOS Intel.
+- Homebrew tap formula and validation workflow template.
+
+### Changed
+
+- Updated project and Debian metadata to consistently use the MIT license.
+- Updated documentation and descriptions for Linux and macOS.
+
 ## [0.1.1] - 2026-07-31
 
 ### Changed
@@ -29,6 +42,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 
 - Debian package support.
 - Automated tests and GitHub Actions CI.
 
-[Unreleased]: https://github.com/exoduscode/lsusers/compare/v0.1.1...HEAD
+[Unreleased]: https://github.com/exoduscode/lsusers/compare/v0.1.2...HEAD
+[0.1.2]: https://github.com/exoduscode/lsusers/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/exoduscode/lsusers/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/exoduscode/lsusers/releases/tag/v0.1.0

@@ -1,3 +1,11 @@
+lsusers (0.1.2-1) noble; urgency=medium
+
+  * Add official macOS account classification support.
+  * Add Python 3.9-3.13 tests on Linux, macOS ARM64, and macOS Intel.
+  * Align package licensing with the upstream MIT license.
+
+ -- Matt Abreu <matheusabreu.dev@gmail.com>  Fri, 31 Jul 2026 18:00:00 -0300
+
 lsusers (0.1.1-1) noble; urgency=medium
 
   * Update package maintainer metadata and author links.

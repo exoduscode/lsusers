@@ -1,0 +1,32 @@
+name: Test tap
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: macos-15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Register checkout as tap
+        run: brew tap --custom-remote exoduscode/tap "$GITHUB_WORKSPACE"
+
+      - name: Audit formula
+        run: brew audit --strict --formula exoduscode/tap/lsusers
+
+      - name: Install formula from source
+        run: brew install --build-from-source exoduscode/tap/lsusers
+
+      - name: Test formula
+        run: brew test exoduscode/tap/lsusers
+

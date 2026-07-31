@@ -1,13 +1,17 @@
-.TH LSUSERS 1 "July 2026" "lsusers 0.1.1" "User Commands"
+.TH LSUSERS 1 "July 2026" "lsusers 0.1.2" "User Commands"
 .SH NAME
-lsusers \- list Linux user accounts simply
+lsusers \- list Linux and macOS user accounts simply
 .SH SYNOPSIS
 .B lsusers
 .RI [ command ]
 .RI [ options ]
 .SH DESCRIPTION
-lsusers lists Linux user accounts using the system account database.
+lsusers lists Linux and macOS user accounts using the system account database.
 By default it lists human users.
+.PP
+On Linux, human accounts are classified using UID_MIN and UID_MAX from
+/etc/login.defs. On macOS, human accounts have UID 500 or greater, do not
+start with an underscore, and have a home directory below /Users.
 .SH COMMANDS
 .TP
 .B all
