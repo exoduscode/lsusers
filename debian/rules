@@ -1,4 +1,9 @@
 #!/usr/bin/make -f
 
+export PYBUILD_NAME=lsusers
+
 %:
 	dh $@ --buildsystem=pybuild
+
+override_dh_auto_test:
+	PYTHONPATH=src python3 -m pytest -v

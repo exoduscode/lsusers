@@ -1,0 +1,8 @@
+#!/bin/sh
+set -eu
+
+command -v lsusers
+
+lsusers --help >/dev/null
+lsusers --version >/dev/null
+lsusers >/dev/null

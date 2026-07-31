@@ -2,7 +2,13 @@ Source: lsusers
 Section: admin
 Priority: optional
 Maintainer: Matheus Abreu <abrmatheus@hotmail.com>
-Build-Depends: debhelper-compat (= 13), dh-python, pybuild-plugin-pyproject, python3-all, python3-setuptools
+Build-Depends:
+ debhelper-compat (= 13),
+ dh-sequence-python3,
+ pybuild-plugin-pyproject,
+ python3-all,
+ python3-pytest,
+ python3-setuptools,
 Standards-Version: 4.7.0
 Rules-Requires-Root: no
 Homepage: https://github.com/exoduscode/lsusers
