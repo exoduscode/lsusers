@@ -38,8 +38,16 @@ lintian --pedantic ../lsusers_*_amd64.changes
 1. Create a branch from `main`.
 2. Add or update tests when behavior changes.
 3. Update documentation when commands or output change.
-4. Use clear, focused commits.
-5. Ensure CI passes before requesting review.
+4. Document security assumptions, trust boundaries, new dependencies,
+   permissions, credentials, and residual risks introduced by the change.
+5. Confirm that workflows and tokens use least privilege and that external
+   Actions are pinned to immutable commit SHAs.
+6. Use clear, focused commits.
+7. Ensure CI and security checks pass before requesting review.
+
+Security is part of the acceptance criteria for every contribution. Review the
+[security policy](SECURITY.md) before proposing changes to account discovery,
+output handling, platform integration, packaging, or release automation.
 
 Prefer Conventional Commits, for example:
 

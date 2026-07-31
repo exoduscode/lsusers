@@ -9,8 +9,15 @@ end users. Python source installation is reserved for development.
 ## 0.1.3 — Stabilization and release automation
 
 - Correct issues found through real-world macOS Intel and Apple Silicon use.
-- Build wheel, source distribution, and Debian artifacts from release tags.
-- Create GitHub Releases and attach verified artifacts automatically.
+- Validate annotated release tags against `main`, the Python versions, the
+  Debian version, and the changelog before building anything.
+- Run the complete Linux, macOS ARM64, and macOS Intel matrix before building
+  wheel, source distribution, and Debian artifacts from release tags.
+- Build each artifact once, test those exact bytes, generate SHA-256 checksums
+  and signed provenance attestations, then create the GitHub Release through a
+  protected environment.
+- Refuse to replace an existing GitHub Release or publish from an inconsistent
+  tag.
 - Open Homebrew tap update pull requests with a least-privilege credential.
 - Evaluate source-built Homebrew bottles after the formula is stable.
 

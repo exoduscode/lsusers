@@ -106,19 +106,50 @@ The public archive-key fingerprint is:
 
 ## Release checklist
 
+The `.github/workflows/release.yml` workflow is the only supported producer of
+release artifacts. An annotated `vMAJOR.MINOR.PATCH` tag must point to a commit
+reachable from `main`. Before publication, the workflow:
+
+1. verifies the tag against `pyproject.toml`, `src/lsusers/__init__.py`, the
+   first Debian changelog entry, and the release heading in `CHANGELOG.md`;
+2. runs the Python 3.9–3.13 matrix on Linux, macOS ARM64, and macOS Intel;
+3. builds wheel, sdist, and `.deb` artifacts exactly once;
+4. validates Python metadata, Debian metadata, Lintian, installation, and CLI
+   smoke tests against the built files;
+5. downloads the same workflow artifacts into the protected `release` job;
+6. creates `SHA256SUMS` and GitHub/Sigstore provenance attestations;
+7. creates the GitHub Release as a draft and publishes it only after every
+   asset upload succeeds.
+
+The workflow refuses lightweight tags, tags outside `main`, inconsistent
+versions, and replacement of an existing release. Configure the GitHub
+environment `release` with a required reviewer before creating the next tag.
+
+### Operator checklist
+
 1. Ensure user-visible behavior, docs, completions, and the manual page agree.
 2. Update the version in `pyproject.toml` and `src/lsusers/__init__.py`.
 3. Add the release to `CHANGELOG.md` using semantic versioning.
 4. Add a matching Debian entry in `debian/changelog` and increment the Debian
    revision when appropriate.
-5. Run tests, build the package, and run Lintian.
-6. Verify `lsusers --version` from the built package.
-7. Tag the release and publish the `.deb` and relevant source artifacts.
-8. Calculate the tagged archive checksum and finalize the Homebrew formula.
-9. Add the immutable asset metadata and SHA-256 to the APT repository manifest.
-10. Publish the approved tag through the protected APT production workflow.
-11. Confirm project, APT, and tap GitHub Actions checks are green.
-12. Verify the documented end-user commands:
+5. Merge the release-preparation PR only after CI is green.
+6. Create and push an annotated tag from the resulting `main` commit.
+7. Approve the protected `release` environment after reviewing the tested
+   artifacts and workflow run.
+8. Verify the published checksums and provenance, for example:
+
+   ```bash
+   sha256sum --check SHA256SUMS
+   gh attestation verify lsusers_<version>-1_all.deb \
+     --repo exoduscode/lsusers
+   ```
+
+9. Calculate the tagged archive checksum and finalize the Homebrew formula.
+10. Add the immutable `.deb` metadata and SHA-256 to the APT repository
+   manifest.
+11. Publish the approved tag through the protected APT production workflow.
+12. Confirm project, APT, and tap GitHub Actions checks are green.
+13. Verify the documented end-user commands:
     `sudo apt install lsusers` on configured Ubuntu 24.04 systems and
     `brew install exoduscode/tap/lsusers` on macOS.
 
