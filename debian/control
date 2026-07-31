@@ -18,6 +18,6 @@ Vcs-Git: https://github.com/exoduscode/lsusers.git
 Package: lsusers
 Architecture: all
 Depends: ${misc:Depends}, ${python3:Depends}
-Description: simple Linux user account listing command
+Description: simple Linux and macOS user account listing command
  lsusers provides memorable commands for listing human, system, and all
- Linux user accounts, with table, JSON, CSV, and names-only output.
+ accounts, with table, JSON, CSV, and names-only output.

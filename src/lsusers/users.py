@@ -1,46 +1,20 @@
 from __future__ import annotations
 
 import pwd
-from pathlib import Path
-from typing import Iterable
+from typing import Iterable, List, Optional
 
 from .models import User
-
-DEFAULT_UID_MIN = 1000
-DEFAULT_UID_MAX = 60000
-NOBODY_UID = 65534
+from .platforms import get_account_classifier
+from .platforms.linux import classify_user, read_uid_range
 
 
-def read_uid_range(path: str = "/etc/login.defs") -> tuple[int, int]:
-    uid_min = DEFAULT_UID_MIN
-    uid_max = DEFAULT_UID_MAX
-    try:
-        for raw_line in Path(path).read_text(encoding="utf-8").splitlines():
-            line = raw_line.strip()
-            if not line or line.startswith("#"):
-                continue
-            parts = line.split()
-            if len(parts) < 2:
-                continue
-            if parts[0] == "UID_MIN":
-                uid_min = int(parts[1])
-            elif parts[0] == "UID_MAX":
-                uid_max = int(parts[1])
-    except (OSError, ValueError):
-        pass
-    return uid_min, uid_max
-
-
-def classify_user(uid: int, uid_min: int, uid_max: int) -> str:
-    if uid == 0:
-        return "system"
-    if uid_min <= uid <= uid_max and uid != NOBODY_UID:
-        return "human"
-    return "system"
-
-
-def list_users() -> list[User]:
-    uid_min, uid_max = read_uid_range()
+def list_users(
+    platform_name: Optional[str] = None,
+    entries: Optional[Iterable[object]] = None,
+    login_defs_path: str = "/etc/login.defs",
+) -> List[User]:
+    account_entries = pwd.getpwall() if entries is None else entries
+    classify = get_account_classifier(platform_name, login_defs_path)
     users = [
         User(
             username=entry.pw_name,
@@ -49,14 +23,14 @@ def list_users() -> list[User]:
             gecos=entry.pw_gecos,
             home=entry.pw_dir,
             shell=entry.pw_shell,
-            user_type=classify_user(entry.pw_uid, uid_min, uid_max),
+            user_type=classify(entry),
         )
-        for entry in pwd.getpwall()
+        for entry in account_entries
     ]
     return sorted(users, key=lambda item: (item.uid, item.username))
 
 
-def filter_users(users: Iterable[User], user_type: str | None = None) -> list[User]:
+def filter_users(users: Iterable[User], user_type: Optional[str] = None) -> List[User]:
     result = list(users)
     if user_type:
         result = [user for user in result if user.user_type == user_type]

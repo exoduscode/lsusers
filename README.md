@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-A modern Linux command-line utility for listing human, system, and all user accounts with beautiful table output, JSON, CSV, and automation-friendly formats.
+A modern Linux and macOS command-line utility for listing human, system, and all user accounts with table, JSON, CSV, and automation-friendly output.
 </p>
 
 <p align="center">
@@ -27,7 +27,7 @@ A modern Linux command-line utility for listing human, system, and all user acco
 
 * List human users
 * List system users
-* List every local user
+* List every account known to the system account database
 * Beautiful table output
 * JSON output
 * CSV output
@@ -35,27 +35,45 @@ A modern Linux command-line utility for listing human, system, and all user acco
 * Fast startup
 * Script-friendly
 * Debian package available
+* Homebrew installation
+* Linux and macOS support
 * Simple command syntax
 
 ---
 
 ## Installation
 
-### Debian Package
+For end users, the supported installation methods are **APT on Linux** and
+**Homebrew on macOS**.
+
+### Linux (APT)
+
+Download the `.deb` file for the release, then install it with APT:
 
 ```bash
-sudo dpkg -i lsusers_<version>_all.deb
-```
-
-If dependencies are required:
-
-```bash
-sudo apt-get install -f
+sudo apt install ./lsusers_<version>_all.deb
 ```
 
 ---
 
-### From source
+### macOS (Homebrew)
+
+```bash
+brew install exoduscode/tap/lsusers
+```
+
+Verify the installation:
+
+```bash
+lsusers --version
+```
+
+---
+
+### Development installation from source
+
+The source workflow is intended for contributors and development, not as the
+supported end-user installation method.
 
 ```bash
 git clone https://github.com/exoduscode/lsusers.git
@@ -76,7 +94,7 @@ pip install -e .
 List human users
 
 ```bash
-lsusers humans
+lsusers human
 ```
 
 List system users
@@ -94,19 +112,19 @@ lsusers all
 JSON output
 
 ```bash
-lsusers humans --json
+lsusers human --json
 ```
 
 CSV output
 
 ```bash
-lsusers humans --csv
+lsusers human --csv
 ```
 
 Only usernames
 
 ```bash
-lsusers humans --names
+lsusers human --names
 ```
 
 ---
@@ -116,9 +134,9 @@ lsusers humans --names
 ### Table
 
 ```text
-USERNAME    UID   HOME               SHELL
-matt        1000  /home/matt         /bin/bash
-john        1001  /home/john         /bin/zsh
+USER  UID   TYPE   HOME        SHELL
+----  ----  -----  ----------  ---------
+matt  1000  human  /home/matt  /bin/bash
 ```
 
 ### JSON
@@ -128,8 +146,11 @@ john        1001  /home/john         /bin/zsh
   {
     "username": "matt",
     "uid": 1000,
+    "gid": 1000,
+    "gecos": "Matt Abreu",
     "home": "/home/matt",
-    "shell": "/bin/bash"
+    "shell": "/bin/bash",
+    "user_type": "human"
   }
 ]
 ```
@@ -137,8 +158,8 @@ john        1001  /home/john         /bin/zsh
 ### CSV
 
 ```csv
-username,uid,home,shell
-matt,1000,/home/matt,/bin/bash
+username,uid,gid,type,home,shell
+matt,1000,1000,human,/home/matt,/bin/bash
 ```
 
 ---
@@ -147,9 +168,10 @@ matt,1000,/home/matt,/bin/bash
 
 | Command          | Description         |
 | ---------------- | ------------------- |
-| `lsusers humans` | List human users    |
+| `lsusers human`  | List human users    |
 | `lsusers system` | List system users   |
 | `lsusers all`    | List every user     |
+| `lsusers count`  | Show account totals |
 | `--json`         | JSON output         |
 | `--csv`          | CSV output          |
 | `--names`        | Usernames only      |
@@ -182,11 +204,12 @@ pytest
 
 ## CI
 
-Every push is automatically validated using GitHub Actions.
+Every push is automatically validated using GitHub Actions on Linux and macOS.
 
 The pipeline performs:
 
-* Unit tests
+* Unit tests on Python 3.9 through 3.13
+* macOS ARM64 and Intel smoke tests
 * Debian package build
 * Lintian validation
 * Artifact publishing
@@ -195,16 +218,13 @@ The pipeline performs:
 
 ## Roadmap
 
-* Better filtering
-* Group listing
-* LDAP support
-* Remote SSH support
-* Interactive mode
-* Colored output
-* Package repositories (APT)
-* Homebrew formula
-* Snap package
-* Flatpak package
+| Version | Focus |
+|---|---|
+| `0.1.3` | Real-world macOS fixes and release automation |
+| `0.2.0` | Filters, configuration, and selectable output fields |
+| `0.3.0` | Read-only remote queries |
+
+See [CHANGELOG.md](CHANGELOG.md) for released and planned work.
 
 ---
 
@@ -253,4 +273,4 @@ https://github.com/exoduscode
 
 ## Acknowledgements
 
-Built with ❤️ for Linux users and the open-source community.
+Built with ❤️ for Linux and macOS users and the open-source community.
