@@ -45,9 +45,14 @@ jobs:
             --pedantic \
             ../lsusers_*_amd64.changes
 
+      - name: Prepare Debian package artifact
+        run: |
+          mkdir -p artifacts
+          cp ../lsusers_*_all.deb artifacts/
+
       - name: Upload Debian package
         uses: actions/upload-artifact@v4
         with:
           name: lsusers-deb
-          path: ../lsusers_*_all.deb
+          path: artifacts/*.deb
           if-no-files-found: error
