@@ -30,3 +30,13 @@ debian/lsusers/
 
 # Local reports
 lintian.log
+
+# Python environments and build artifacts
+.venv/
+venv/
+build/
+dist/
+*.egg-info/
+.pytest_cache/
+__pycache__/
+*.py[cod]

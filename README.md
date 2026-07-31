@@ -25,7 +25,7 @@ lsusers
 ```
 
 ## Author
-Matt Abreu [X: @matheusabr](https://x.com/matheusabr) - [Exoduscode](https://exoduscode.io)
+Matt Abreu [X: @matheusabr](https://x.com/mrmattabreu) - [Exoduscode](https://exoduscode.io)
 
 ## License
 

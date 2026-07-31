@@ -1,7 +1,7 @@
 Source: lsusers
 Section: admin
 Priority: optional
-Maintainer: Matheus Abreu <abrmatheus@hotmail.com>
+Maintainer: Matt Abreu <matheusabreu.dev@gmail.com>
 Build-Depends:
  debhelper-compat (= 13),
  dh-sequence-python3,
@@ -9,7 +9,7 @@ Build-Depends:
  python3-all,
  python3-pytest,
  python3-setuptools,
-Standards-Version: 4.7.0
+Standards-Version: 4.6.2
 Rules-Requires-Root: no
 Homepage: https://github.com/exoduscode/lsusers
 Vcs-Browser: https://github.com/exoduscode/lsusers
