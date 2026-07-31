@@ -31,6 +31,10 @@ must not be merged merely because no vulnerability is currently known.
   only to the job that needs them.
 - Third-party and GitHub-maintained Actions are pinned to immutable commit
   SHAs; automated updates still require CI and review.
+- CodeQL `init` and `analyze` are excluded from digest-only Dependabot updates.
+  They must be advanced together to the immutable commit for a newly audited,
+  versioned CodeQL release; CI enforces that both pins and version annotations
+  remain identical.
 - Releases require an annotated tag on `main`, synchronized versions, the full
   test matrix, verified artifacts, SHA-256 checksums, provenance attestations,
   and approval through a protected environment.

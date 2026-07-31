@@ -11,6 +11,11 @@ updates:
     labels:
       - dependencies
       - security
+    ignore:
+      # CodeQL has multiple entry points that must remain on one audited,
+      # versioned release. Digest-only updates from the moving releases/v4
+      # branch are intentionally reviewed and applied as one manual change.
+      - dependency-name: github/codeql-action/*
 
   - package-ecosystem: pip
     directory: /

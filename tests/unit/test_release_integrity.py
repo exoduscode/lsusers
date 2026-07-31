@@ -48,3 +48,17 @@ def test_release_version_check_rejects_invalid_tag():
 
     assert result.returncode == 1
     assert "is not vMAJOR.MINOR.PATCH" in result.stderr
+
+
+def test_codeql_steps_share_one_audited_release_pin():
+    workflow = (ROOT / ".github" / "workflows" / "security.yml").read_text(
+        encoding="utf-8"
+    )
+    matches = re.findall(
+        r"github/codeql-action/(init|analyze)@([0-9a-f]{40}) # (v[0-9]+\.[0-9]+\.[0-9]+)",
+        workflow,
+    )
+    pins = {step: (sha, version) for step, sha, version in matches}
+
+    assert set(pins) == {"init", "analyze"}
+    assert pins["init"] == pins["analyze"]

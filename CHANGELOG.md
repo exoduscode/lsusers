@@ -19,6 +19,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 
 - GitHub Actions dependencies are pinned to immutable commit SHAs.
 - Security investigation and least privilege are explicit acceptance criteria
   for every project change.
+- CodeQL updates are applied as one audited version change instead of separate
+  digest-only Dependabot pull requests.
 
 ### Planned
 
