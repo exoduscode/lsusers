@@ -25,7 +25,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 
   for every project change.
 - CodeQL updates are applied as one audited version change instead of separate
   digest-only Dependabot pull requests.
-- Python package metadata uses the current SPDX license expression format.
 
 ## [0.1.2] - 2026-07-31
 
