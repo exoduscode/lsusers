@@ -73,7 +73,7 @@ See [Output formats](output-formats.md) for the schemas.
 
 ## `count --json` is not JSON
 
-In version 0.1.2, `count` always uses its fixed plain-text output and does not
+In version 0.1.3, `count` always uses its fixed plain-text output and does not
 apply output format flags. Use list JSON and calculate the desired count with a
 JSON processor when structured output is required.
 

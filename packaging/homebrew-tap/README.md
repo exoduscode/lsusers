@@ -1,7 +1,7 @@
-# ExodusCode Homebrew tap scaffold
+# Exoduscode Homebrew tap scaffold
 
 This directory contains the files to publish in the separate
-`exoduscode/homebrew-tap` repository after the immutable `v0.1.2` tag exists.
+`exoduscode/homebrew-tap` repository after the immutable release tag exists.
 Homebrew is the supported installation channel for macOS end users.
 
 ## Finalize the formula
@@ -10,9 +10,9 @@ Download the tagged GitHub archive and calculate its checksum:
 
 ```bash
 curl -L \
-  https://github.com/exoduscode/lsusers/archive/refs/tags/v0.1.2.tar.gz \
-  -o lsusers-v0.1.2.tar.gz
-shasum -a 256 lsusers-v0.1.2.tar.gz
+  https://github.com/exoduscode/lsusers/archive/refs/tags/v0.1.3.tar.gz \
+  -o lsusers-v0.1.3.tar.gz
+shasum -a 256 lsusers-v0.1.3.tar.gz
 ```
 
 Copy `Formula/lsusers.rb.template` to `Formula/lsusers.rb`, replace

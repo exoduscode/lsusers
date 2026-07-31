@@ -1,3 +1,11 @@
+lsusers (0.1.3-1) noble; urgency=medium
+
+  * Add an immutable, tested, and attested GitHub release workflow.
+  * Add automated Homebrew tap update pull requests using a GitHub App.
+  * Add continuous CodeQL and dependency review security controls.
+
+ -- Matt Abreu <matheusabreu.dev@gmail.com>  Fri, 31 Jul 2026 18:30:00 -0300
+
 lsusers (0.1.2-1) noble; urgency=medium
 
   * Add official macOS account classification support.

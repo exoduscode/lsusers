@@ -48,7 +48,7 @@ For end users, the supported installation methods are **APT on Linux** and
 
 ### Linux (APT)
 
-Ubuntu 24.04 users configure the signed ExodusCode repository once:
+Ubuntu 24.04 users configure the signed Exoduscode repository once:
 
 ```bash
 curl -fsSL https://exoduscode.github.io/apt/keys/exoduscode-archive-keyring.gpg \
@@ -111,7 +111,7 @@ pip install -e .
 
 ### Linux (APT)
 
-Remove `lsusers` while keeping the ExodusCode repository configured for future
+Remove `lsusers` while keeping the Exoduscode repository configured for future
 installation:
 
 ```bash
@@ -132,7 +132,7 @@ sudo apt update
 brew uninstall lsusers
 ```
 
-Optionally remove the ExodusCode tap if no other installed formula uses it:
+Optionally remove the Exoduscode tap if no other installed formula uses it:
 
 ```bash
 brew untap exoduscode/tap
@@ -271,7 +271,6 @@ The pipeline performs:
 
 | Version | Focus |
 |---|---|
-| `0.1.3` | Real-world macOS fixes and release automation |
 | `0.2.0` | Filters, configuration, and selectable output fields |
 | `0.3.0` | Read-only remote queries |
 

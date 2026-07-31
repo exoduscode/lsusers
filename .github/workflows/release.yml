@@ -209,3 +209,89 @@ jobs:
             --title "lsusers ${GITHUB_REF_NAME#v}" \
             --generate-notes
           gh release edit "$GITHUB_REF_NAME" --draft=false
+
+  update-homebrew:
+    name: Open Homebrew tap update
+    needs: publish
+    runs-on: ubuntu-24.04
+    environment: homebrew
+    permissions:
+      contents: read
+    steps:
+      - name: Create least-privilege tap token
+        id: app-token
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          app-id: ${{ secrets.HOMEBREW_APP_ID }}
+          private-key: ${{ secrets.HOMEBREW_APP_PRIVATE_KEY }}
+          owner: exoduscode
+          repositories: homebrew-tap
+
+      - name: Checkout immutable release source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          path: source
+
+      - name: Checkout Homebrew tap
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: exoduscode/homebrew-tap
+          token: ${{ steps.app-token.outputs.token }}
+          path: tap
+
+      - name: Calculate tagged source checksum
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          curl --fail --location --proto '=https' --tlsv1.2 \
+            --retry 3 --output source.tar.gz \
+            "https://github.com/exoduscode/lsusers/archive/refs/tags/${RELEASE_TAG}.tar.gz"
+          echo "archive_sha256=$(sha256sum source.tar.gz | cut -d ' ' -f 1)" >>"$GITHUB_ENV"
+
+      - name: Update formula on an idempotent release branch
+        id: formula
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        working-directory: tap
+        run: |
+          version=${RELEASE_TAG#v}
+          branch="release/lsusers-$version"
+          if git ls-remote --exit-code --heads origin "$branch" >/dev/null 2>&1; then
+            branch_exists=true
+            git fetch origin "$branch"
+            git switch --create "$branch" --track "origin/$branch"
+          else
+            branch_exists=false
+            git switch --create "$branch"
+          fi
+          python ../source/scripts/release/update-homebrew-formula.py \
+            Formula/lsusers.rb "$version" "$archive_sha256"
+          if git diff --quiet; then
+            echo "formula already contains lsusers $version"
+            echo "branch_ready=$branch_exists" >>"$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git config user.name "exoduscode-release[bot]"
+          git config user.email "exoduscode-release[bot]@users.noreply.github.com"
+          git add Formula/lsusers.rb
+          git commit -m "Update lsusers to $version"
+          git push --set-upstream origin "$branch"
+          echo "branch_ready=true" >>"$GITHUB_OUTPUT"
+
+      - name: Open tap pull request if needed
+        if: steps.formula.outputs.branch_ready == 'true'
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          RELEASE_TAG: ${{ github.ref_name }}
+        working-directory: tap
+        run: |
+          version=${RELEASE_TAG#v}
+          branch="release/lsusers-$version"
+          if gh pr view "$branch" --repo exoduscode/homebrew-tap >/dev/null 2>&1; then
+            echo "tap pull request already exists"
+          else
+            gh pr create --repo exoduscode/homebrew-tap \
+              --base main --head "$branch" \
+              --title "Update lsusers to $version" \
+              --body "Automated update from the immutable lsusers $RELEASE_TAG release."
+          fi

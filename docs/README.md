@@ -5,7 +5,7 @@ accounts known to a Linux or macOS system. It separates human and system account
 can produce readable tables or machine-friendly JSON, CSV, and names-only
 output.
 
-The documentation in this directory describes version **0.1.2**.
+The documentation in this directory describes version **0.1.3**.
 
 ## Start here
 

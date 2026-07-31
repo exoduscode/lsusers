@@ -79,5 +79,5 @@ or `/etc/login.defs`.
 ## Python API status
 
 Modules can be imported, and the tests use functions such as `classify_user`,
-but version 0.1.2 does not declare a stable public Python API. The supported
+but version 0.1.3 does not declare a stable public Python API. The supported
 user-facing interface is the command-line application.
