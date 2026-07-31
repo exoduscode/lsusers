@@ -107,6 +107,39 @@ pip install -e .
 
 ---
 
+## Uninstall
+
+### Linux (APT)
+
+Remove `lsusers` while keeping the ExodusCode repository configured for future
+installation:
+
+```bash
+sudo apt remove lsusers
+```
+
+To also remove the repository configuration and signing key:
+
+```bash
+sudo rm /etc/apt/sources.list.d/exoduscode.sources
+sudo rm /usr/share/keyrings/exoduscode-archive-keyring.gpg
+sudo apt update
+```
+
+### macOS (Homebrew)
+
+```bash
+brew uninstall lsusers
+```
+
+Optionally remove the ExodusCode tap if no other installed formula uses it:
+
+```bash
+brew untap exoduscode/tap
+```
+
+---
+
 ## Quick Start
 
 List human users
