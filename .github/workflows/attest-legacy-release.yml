@@ -1,0 +1,51 @@
+name: Attest legacy release asset
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: attest-legacy-release-v0.1.2
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  attest:
+    name: Attest immutable v0.1.2 Debian asset
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    environment: release
+    permissions:
+      attestations: write
+      contents: read
+      id-token: write
+    steps:
+      - name: Verify and download immutable release asset
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: v0.1.2
+          ASSET: lsusers_0.1.2-1_all.deb
+          EXPECTED_SHA256: e1c630dc797958b5d5f12d397be8d03276f4ff2f7233b3bd57eecadfbe431735
+        run: |
+          release=$(gh release view "$RELEASE_TAG" \
+            --repo "$GITHUB_REPOSITORY" \
+            --json tagName,isDraft,isPrerelease,assets)
+          test "$(jq -r '.tagName' <<<"$release")" = "$RELEASE_TAG"
+          test "$(jq -r '.isDraft' <<<"$release")" = false
+          test "$(jq -r '.isPrerelease' <<<"$release")" = false
+          test "$(jq -r --arg asset "$ASSET" \
+            '.assets[] | select(.name == $asset) | .digest' <<<"$release")" \
+            = "sha256:$EXPECTED_SHA256"
+          gh release download "$RELEASE_TAG" \
+            --repo "$GITHUB_REPOSITORY" --pattern "$ASSET"
+          printf '%s  %s\n' "$EXPECTED_SHA256" "$ASSET" | \
+            sha256sum --check --strict
+          test "$(dpkg-deb --field "$ASSET" Package)" = lsusers
+          test "$(dpkg-deb --field "$ASSET" Version)" = 0.1.2-1
+          test "$(dpkg-deb --field "$ASSET" Architecture)" = all
+
+      - name: Record build provenance for the verified legacy asset
+        uses: actions/attest@508db95dd578ae2727ebd6217d5ba78e4fbda05d # v4.2.1
+        with:
+          subject-path: lsusers_0.1.2-1_all.deb
